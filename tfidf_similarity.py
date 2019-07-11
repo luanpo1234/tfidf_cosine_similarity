@@ -45,12 +45,14 @@ def get_most_similar(data, cos_sim, n):
     most_similar: `list` of tuples with `n` most similar documents arranged from most similar to less similar.
     Each `tuple` contains one similarity value `float` and one `str` document.
     """
+    if n > len(data):
+        n = len(data)
     sorted_indexes = []
     index = 0
     for el in cos_sim:
         sorted_indexes.append((index, el))
         index += 1
-    #índices de `data`, organizando do mais similar para o menos similar
+    #`data` indexes from most similar to less similar
     sorted_indexes = sorted(sorted_indexes, key = lambda x: x[1], reverse = True)
     most_similar = []
     for n in range(n):
